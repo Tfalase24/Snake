@@ -8,7 +8,7 @@ public class GameFrame extends JFrame {
         this.setTitle("SSSS I'm a SNAKEEEEE");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.pack(); // Takes the JFRAME and makes sure components fit snuggly around all of the components that have been added to the JFrame
+        this.pack(); // Takes the JFRAME and makes sure components fit snuggly around all the components that have been added to the JFrame
         this.setVisible(true);
         this.setLocationRelativeTo(null);
 
