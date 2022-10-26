@@ -1,0 +1,14 @@
+I want to add:
+start screen
+A two player version, you can eat the other snake too
+Easy, Medium and Hard (Depending on game-unit size, delay speed, initial size of snake, increase speed everytime you eat an apple), Timer mode, Minesweeper mode
+Golden Apple = +2 points per apple and invincible for 5 seconds, increase speed
+Inverse mode
+Can cross through the outside walls
+Bite of tail, if you get to the head you lose
+Random apple (changes between normal, golden, poison apple, time apple)
+Poison apple slows you down (unable to turn as fast), and lose points
+
+
+
+
