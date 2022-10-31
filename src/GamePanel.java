@@ -150,7 +150,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
         repaint(); // The repaint method is a final method used whenever we want to call update method along with the call to paint method
         // Call to update method clears the current window, performs an update, and afterwards call paint method
-
+        // This method runs every time interval
     }
 
     public class MyKeyAdapter extends KeyAdapter { // An abstract adapter class for receiving keyboard events. The methods in this class are empty. This class exists as convenience for creating listener objects
