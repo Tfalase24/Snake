@@ -14,18 +14,19 @@ public class GamePanel extends JPanel implements ActionListener {
     static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
     static final int DELAY = 75;
 
-    final int x[] = new int[GAME_UNITS];
-    final int y[] = new int[GAME_UNITS];
-    int bodyParts = 6;
-    int appleEaten = 0;
-    int appleX;
-    int appleY;
+    final static int x[] = new int[GAME_UNITS];
+    final static int y[] = new int[GAME_UNITS];
+    static int bodyParts = 6;
+    static int appleEaten = 0;
+    static int appleX;
+    static int appleY;
 
     char direction = 'R';
     boolean running = false;
     Timer timer;
     Random random;
     Graphics graphics;
+    GameMenu menu = new GameMenu();
 
     private enum STATE{
         MENU,
@@ -33,7 +34,7 @@ public class GamePanel extends JPanel implements ActionListener {
         GAMEOVER
     };
 
-    private STATE State = STATE.MENU;
+    private STATE State = STATE.GAME;
 
     GamePanel() {
         random = new Random();
@@ -41,6 +42,7 @@ public class GamePanel extends JPanel implements ActionListener {
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
+        startGame();
     }
 
 
@@ -59,7 +61,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void draw(Graphics graphics) {
         if(State == STATE.MENU){
-            startScreen(graphics);
+            menu.startScreen(graphics);
         }
         else if (State == STATE.GAME) {
             for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
@@ -152,14 +154,6 @@ public class GamePanel extends JPanel implements ActionListener {
         FontMetrics fontMetrics = getFontMetrics(graphics.getFont());
         graphics.drawString(("Score: " + appleEaten), (SCREEN_WIDTH - fontMetrics.stringWidth("Score: " + appleEaten)) / 2, graphics.getFont().getSize());
     }
-
-    public void startScreen(Graphics graphics){
-        graphics.setColor(Color.WHITE);
-        graphics.setFont(new Font("Ink Free", Font.BOLD, 50));
-        FontMetrics metrics = getFontMetrics(graphics.getFont());
-        graphics.drawString(("Welcome to Snake"), (SCREEN_WIDTH - metrics.stringWidth("Welcome to Snake")) / 2, graphics.getFont().getSize());
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (running) {
