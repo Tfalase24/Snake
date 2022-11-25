@@ -1,0 +1,3 @@
+Java Snake Notes:
+
+Instead of creating separate classes for each game mode. Create different methods using polymorphism so in game panel you only need to create one instance of the (now) One Player class
