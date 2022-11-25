@@ -24,4 +24,50 @@ public class OnePlayer {
         graphics.drawString(("Score: " + GamePanel.appleEaten), (GamePanel.SCREEN_WIDTH - fontMetrics.stringWidth("Score: " + GamePanel.appleEaten)) / 2, graphics.getFont().getSize());
 
     }
+
+    public void move() {
+        for (int i = GamePanel.bodyParts; i > 0; i--) {
+            GamePanel.x[i] = GamePanel.x[i - 1];
+            GamePanel.y[i] = GamePanel.y[i - 1];
+        }
+        switch (GamePanel.direction) {
+            case 'U':
+                GamePanel.y[0] = GamePanel.y[0] - GamePanel.UNIT_SIZE;
+                break;
+            case 'D':
+                GamePanel. y[0] = GamePanel.y[0] + GamePanel.UNIT_SIZE;
+                break;
+            case 'L':
+                GamePanel.x[0] = GamePanel.x[0] - GamePanel.UNIT_SIZE;
+                break;
+            case 'R':
+                GamePanel. x[0] = GamePanel.x[0] + GamePanel.UNIT_SIZE;
+                break;
+        }
+
+    }
+    public void checkCollisions() {
+
+        for (int i = GamePanel.bodyParts; i > 0; i--) {
+            if ((GamePanel.x[0] == GamePanel.x[i] && GamePanel.y[0] == GamePanel.y[i])) {
+                GamePanel.running = false;
+            }
+        }
+
+        if (GamePanel.x[0] < 0 || GamePanel.x[0] > GamePanel.SCREEN_WIDTH || GamePanel.y[0] < 0 || GamePanel.y[0] > GamePanel.SCREEN_HEIGHT) {
+            GamePanel.running = false;
+        }
+        if (!GamePanel.running) {
+            GamePanel.timer.stop();
+        }
+    }
+
+    public void checkApple() {
+        if ((GamePanel.x[0] == GamePanel.appleX && GamePanel.y[0] == GamePanel.appleY)) {
+            GamePanel.bodyParts++;
+            GamePanel.appleEaten++;
+            GamePanel.newApple();
+        }
+
+    }
 }
