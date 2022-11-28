@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements ActionListener {
         GAMEOVER
     };
 
-    private STATE State = STATE.GAME;
+    private STATE State = STATE.MENU;
 
     GamePanel() {
         random = new Random();
@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements ActionListener {
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
-        startGame();
+        // startGame();
     }
 
 
