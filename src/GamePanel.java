@@ -8,11 +8,11 @@ import java.util.Random;
 
 public class GamePanel extends JPanel implements ActionListener {
 
-    static final int SCREEN_WIDTH = 600;
-    static final int SCREEN_HEIGHT = 600;
-    static final int UNIT_SIZE = 25;
-    static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
-    static final int DELAY = 75;
+    final static int SCREEN_WIDTH = 600;
+    final static int SCREEN_HEIGHT = 600;
+    final static int UNIT_SIZE = 25;
+    final static int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
+    final int DELAY = 75;
 
     final static int x[] = new int[GAME_UNITS];
     final static int y[] = new int[GAME_UNITS];
@@ -20,23 +20,93 @@ public class GamePanel extends JPanel implements ActionListener {
     static int appleEaten = 0;
     static int appleX;
     static int appleY;
-
     static char direction = 'R';
     static boolean running = false;
     static Timer timer;
-    static Random random;
+    Random random;
     Graphics graphics;
     GameMenu menu = new GameMenu();
     GameOver gameOver = new GameOver();
     OnePlayer onePlayer = new OnePlayer();
+    public static STATE State = STATE.MENU;
 
-    private enum STATE{
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public Random getRandom() {
+        return random;
+    }
+
+    public char getDirection() {
+        return direction;
+    }
+
+    public void setDirection(char direction) {
+        this.direction = direction;
+    }
+
+    public int getBodyParts() {
+        return bodyParts;
+    }
+
+    public void setBodyParts(int bodyParts) {
+        this.bodyParts = bodyParts;
+    }
+
+    public int getAppleX() {
+        return appleX;
+    }
+
+    public void setAppleX(int appleX) {
+        this.appleX = appleX;
+    }
+
+    public int getAppleY() {
+        return appleY;
+    }
+
+    public void setAppleY(int appleY) {
+        this.appleY = appleY;
+    }
+
+    public int getAppleEaten() {
+        return appleEaten;
+    }
+
+    public void setAppleEaten(int appleEaten) {
+        this.appleEaten = appleEaten;
+    }
+
+    public int getSCREEN_WIDTH() {
+        return SCREEN_WIDTH;
+    }
+
+    public int getSCREEN_HEIGHT() {
+        return SCREEN_HEIGHT;
+    }
+
+    public int getUNIT_SIZE() {
+        return UNIT_SIZE;
+    }
+
+    public STATE getState() {
+        return State;
+    }
+
+    public void setState(STATE state) {
+        State = state;
+    }
+
+    public enum STATE{
         MENU,
         GAME,
         GAMEOVER
-    };
-
-    private STATE State = STATE.MENU;
+    }
 
     GamePanel() {
         random = new Random();
@@ -44,16 +114,7 @@ public class GamePanel extends JPanel implements ActionListener {
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
-        // startGame();
-    }
-
-
-    public void startGame() {
-        State = STATE.GAME;
-            newApple();
-            running = true;
-            timer = new Timer(DELAY, this);
-            timer.start();
+        this.addMouseListener(new MouseInput());
         }
 
     public void paintComponent(Graphics graphics) {
@@ -67,13 +128,23 @@ public class GamePanel extends JPanel implements ActionListener {
         }
         else if (State == STATE.GAME) {
             onePlayer.OnePlayerMode(graphics);
+            while(!running) {
+                startGame();
+            }
         } else {
             if(State == STATE.GAMEOVER)
             gameOver.gameOver(graphics);
         }
     }
 
-    public static void newApple() {
+    public void startGame() {
+        newApple();
+        running = true;
+        timer = new Timer(DELAY, this);
+        timer.start();
+    }
+
+    public void newApple() {
         appleX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
         appleY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
 
@@ -83,14 +154,13 @@ public class GamePanel extends JPanel implements ActionListener {
 
         for (int i = bodyParts; i > 0; i--) {
             if ((x[0] == x[i] && y[0] == y[i])) {
-                running = false;
+                State = STATE.GAMEOVER;
             }
         }
-
         if (x[0] < 0 || x[0] > SCREEN_WIDTH || y[0] < 0 || y[0] > SCREEN_HEIGHT) {
-            running = false;
+            State = STATE.GAMEOVER;
         }
-        if (!running) {
+        if (State == STATE.GAMEOVER) {
             timer.stop();
         }
     }

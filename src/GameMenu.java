@@ -2,6 +2,8 @@ import java.awt.*;
 
 public class GameMenu {
 
+    GamePanel gamePanel;
+
     public void startScreen(Graphics graphics){
         Graphics2D graphics2D = (Graphics2D) graphics;
         graphics.setColor(Color.WHITE);

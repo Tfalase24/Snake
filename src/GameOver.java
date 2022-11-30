@@ -1,6 +1,9 @@
 import java.awt.*;
 
 public class GameOver {
+
+    GamePanel gamePanel;
+
     public void gameOver(Graphics graphics) {
 
         graphics.setColor(Color.RED);
