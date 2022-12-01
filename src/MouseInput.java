@@ -22,12 +22,12 @@ public class MouseInput extends Component implements MouseListener {
             }
         }
         if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
-            if (my >= 350 && my <= 450) {
+            if (my >= 300 && my <= 400) {
                 GamePanel.State = GamePanel.STATE.GAMEOVER;
             }
         }
         if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
-            if (my >= 550 && my <= 650) {
+            if (my >= 450 && my <= 550) {
                 JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
