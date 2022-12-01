@@ -98,10 +98,6 @@ public class GamePanel extends JPanel implements ActionListener {
         return State;
     }
 
-    public void setState(STATE state) {
-        State = state;
-    }
-
     public enum STATE{
         MENU,
         GAME,
@@ -115,6 +111,8 @@ public class GamePanel extends JPanel implements ActionListener {
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
         this.addMouseListener(new MouseInput());
+        timer = new Timer(DELAY, this);
+        timer.start();
         }
 
     public void paintComponent(Graphics graphics) {
@@ -125,6 +123,7 @@ public class GamePanel extends JPanel implements ActionListener {
     public void draw(Graphics graphics) {
         if(State == STATE.MENU){
             menu.startScreen(graphics);
+
         }
         else if (State == STATE.GAME) {
             onePlayer.OnePlayerMode(graphics);
@@ -140,8 +139,8 @@ public class GamePanel extends JPanel implements ActionListener {
     public void startGame() {
         newApple();
         running = true;
-        timer = new Timer(DELAY, this);
-        timer.start();
+      /*  timer = new Timer(DELAY, this);
+        timer.start();*/
     }
 
     public void newApple() {
