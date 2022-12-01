@@ -1,7 +1,10 @@
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
 
-public class MouseInput implements MouseListener {
+public class MouseInput extends Component implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -13,15 +16,24 @@ public class MouseInput implements MouseListener {
     public void mousePressed(MouseEvent e) {
         int mx = e.getX();
         int my = e.getY();
-        if(mx >= ((GamePanel.SCREEN_WIDTH/2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH/2) + 100)){
-            if (my >= 150 && my <= 250){
-                System.out.println("this button works");
+        if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
+            if (my >= 150 && my <= 250) {
                 GamePanel.State = GamePanel.STATE.GAME;
-                }
             }
         }
-
-    @Override
+        if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
+            if (my >= 350 && my <= 450) {
+                GamePanel.State = GamePanel.STATE.GAMEOVER;
+            }
+        }
+        if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
+            if (my >= 550 && my <= 650) {
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+        }
+    }
+                @Override
     public void mouseReleased(MouseEvent e) {
 
     }
