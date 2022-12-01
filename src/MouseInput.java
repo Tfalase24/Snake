@@ -28,8 +28,7 @@ public class MouseInput extends Component implements MouseListener {
         }
         if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
             if (my >= 450 && my <= 550) {
-                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+                System.exit(0);
             }
         }
     }
