@@ -28,50 +28,15 @@ public class GamePanel extends JPanel implements ActionListener {
     GameMenu menu = new GameMenu();
     GameOver gameOver = new GameOver();
     OnePlayer onePlayer = new OnePlayer();
+    Boolean restart = false;
     public static STATE State = STATE.MENU;
 
-    public void setRunning(boolean running) {
-        this.running = running;
-    }
-
-    public boolean isRunning() {
-        return running;
-    }
-
-    public Random getRandom() {
-        return random;
-    }
-
-    public char getDirection() {
-        return direction;
-    }
-
-    public void setDirection(char direction) {
-        this.direction = direction;
-    }
-
-    public int getBodyParts() {
+    int getBodyParts() {
         return bodyParts;
     }
 
     public void setBodyParts(int bodyParts) {
         this.bodyParts = bodyParts;
-    }
-
-    public int getAppleX() {
-        return appleX;
-    }
-
-    public void setAppleX(int appleX) {
-        this.appleX = appleX;
-    }
-
-    public int getAppleY() {
-        return appleY;
-    }
-
-    public void setAppleY(int appleY) {
-        this.appleY = appleY;
     }
 
     public int getAppleEaten() {
@@ -82,21 +47,6 @@ public class GamePanel extends JPanel implements ActionListener {
         this.appleEaten = appleEaten;
     }
 
-    public int getSCREEN_WIDTH() {
-        return SCREEN_WIDTH;
-    }
-
-    public int getSCREEN_HEIGHT() {
-        return SCREEN_HEIGHT;
-    }
-
-    public int getUNIT_SIZE() {
-        return UNIT_SIZE;
-    }
-
-    public STATE getState() {
-        return State;
-    }
 
     public enum STATE{
         MENU,
@@ -123,16 +73,21 @@ public class GamePanel extends JPanel implements ActionListener {
     public void draw(Graphics graphics) {
         if(State == STATE.MENU){
             menu.startScreen(graphics);
-
         }
         else if (State == STATE.GAME) {
-            onePlayer.OnePlayerMode(graphics);
             while(!running) {
                 startGame();
             }
+            onePlayer.OnePlayerMode(graphics);
         } else {
             if(State == STATE.GAMEOVER)
             gameOver.gameOver(graphics);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            running = false;
         }
     }
 
@@ -176,14 +131,15 @@ public class GamePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (running) {
+        if (GamePanel.State == STATE.GAME) {
+            if(restart) {
+
+            }
             onePlayer.move();
             checkApple();
             checkCollisions();
         }
         repaint();
-
-
     }
 
     public class MyKeyAdapter extends KeyAdapter {

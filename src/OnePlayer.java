@@ -52,12 +52,12 @@ public class OnePlayer {
 
         for (int i = GamePanel.bodyParts; i > 0; i--) {
             if ((GamePanel.x[0] == GamePanel.x[i] && GamePanel.y[0] == GamePanel.y[i])) {
-               GamePanel.running = false;
+                GamePanel.State = GamePanel.STATE.GAMEOVER;
             }
         }
 
         if (GamePanel.x[0] < 0 || GamePanel.x[0] > GamePanel.SCREEN_WIDTH || GamePanel.y[0] < 0 || GamePanel.y[0] > GamePanel.SCREEN_HEIGHT) {
-            GamePanel.running = false;
+            GamePanel.State = GamePanel.STATE.GAMEOVER;
         }
         if (!GamePanel.running) {
             GamePanel.timer.stop();
