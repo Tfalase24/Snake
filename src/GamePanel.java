@@ -30,26 +30,6 @@ public class GamePanel extends JPanel implements ActionListener {
     OnePlayer onePlayer = new OnePlayer();
     public static STATE State = STATE.MENU;
 
-    public void setRunning(boolean running) {
-        this.running = running;
-    }
-
-    public int getBodyParts() {
-        return bodyParts;
-    }
-
-    public void setBodyParts(int bodyParts) {
-        this.bodyParts = bodyParts;
-    }
-
-    public int getAppleEaten() {
-        return appleEaten;
-    }
-
-    public void setAppleEaten(int appleEaten) {
-        this.appleEaten = appleEaten;
-    }
-
     public enum STATE{
         MENU,
         GAME,
@@ -106,14 +86,14 @@ public class GamePanel extends JPanel implements ActionListener {
         for (int i = bodyParts; i > 0; i--) {
             if ((x[0] == x[i] && y[0] == y[i])) {
                 State = STATE.GAMEOVER;
-                timer.restart();
-                // System.out.println("The State is " + State);
+                running = false;
+                timer.stop();
             }
         }
         if (x[0] < 0 || x[0] > SCREEN_WIDTH || y[0] < 0 || y[0] > SCREEN_HEIGHT) {
             State = STATE.GAMEOVER;
-           timer.stop();
-            System.out.println("2 The State is " + State);
+            running = false;
+            timer.stop();
         }
     }
 

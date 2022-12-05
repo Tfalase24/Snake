@@ -19,7 +19,7 @@ public class GameOver {
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("Ink Free", Font.BOLD, 24));
         FontMetrics fontMetrics2 = graphics.getFontMetrics(graphics.getFont());
-        graphics.drawString(("Return to Menu"), (GamePanel.SCREEN_WIDTH - fontMetrics2.stringWidth("Return to Menu")) / 2, 300);
+        graphics.drawString(("Restart"), (GamePanel.SCREEN_WIDTH - fontMetrics2.stringWidth("Return to Menu")) / 2, 300);
 
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("Ink Free", Font.BOLD, 24));
