@@ -34,22 +34,6 @@ public class GamePanel extends JPanel implements ActionListener {
         this.running = running;
     }
 
-    public boolean isRunning() {
-        return running;
-    }
-
-    public Random getRandom() {
-        return random;
-    }
-
-    public char getDirection() {
-        return direction;
-    }
-
-    public void setDirection(char direction) {
-        this.direction = direction;
-    }
-
     public int getBodyParts() {
         return bodyParts;
     }
@@ -58,44 +42,12 @@ public class GamePanel extends JPanel implements ActionListener {
         this.bodyParts = bodyParts;
     }
 
-    public int getAppleX() {
-        return appleX;
-    }
-
-    public void setAppleX(int appleX) {
-        this.appleX = appleX;
-    }
-
-    public int getAppleY() {
-        return appleY;
-    }
-
-    public void setAppleY(int appleY) {
-        this.appleY = appleY;
-    }
-
     public int getAppleEaten() {
         return appleEaten;
     }
 
     public void setAppleEaten(int appleEaten) {
         this.appleEaten = appleEaten;
-    }
-
-    public int getSCREEN_WIDTH() {
-        return SCREEN_WIDTH;
-    }
-
-    public int getSCREEN_HEIGHT() {
-        return SCREEN_HEIGHT;
-    }
-
-    public int getUNIT_SIZE() {
-        return UNIT_SIZE;
-    }
-
-    public STATE getState() {
-        return State;
     }
 
     public enum STATE{
@@ -123,24 +75,24 @@ public class GamePanel extends JPanel implements ActionListener {
     public void draw(Graphics graphics) {
         if(State == STATE.MENU){
             menu.startScreen(graphics);
-
+            running = true;
         }
         else if (State == STATE.GAME) {
             onePlayer.OnePlayerMode(graphics);
             while(!running) {
                 startGame();
+                System.out.println("3 The State is: " + State);
             }
         } else {
             if(State == STATE.GAMEOVER)
             gameOver.gameOver(graphics);
+           running = false;
         }
     }
 
     public void startGame() {
         newApple();
         running = true;
-      /*  timer = new Timer(DELAY, this);
-        timer.start();*/
     }
 
     public void newApple() {
@@ -154,13 +106,14 @@ public class GamePanel extends JPanel implements ActionListener {
         for (int i = bodyParts; i > 0; i--) {
             if ((x[0] == x[i] && y[0] == y[i])) {
                 State = STATE.GAMEOVER;
+                timer.restart();
+                // System.out.println("The State is " + State);
             }
         }
         if (x[0] < 0 || x[0] > SCREEN_WIDTH || y[0] < 0 || y[0] > SCREEN_HEIGHT) {
             State = STATE.GAMEOVER;
-        }
-        if (State == STATE.GAMEOVER) {
-            timer.stop();
+           timer.stop();
+            System.out.println("2 The State is " + State);
         }
     }
 
@@ -179,7 +132,8 @@ public class GamePanel extends JPanel implements ActionListener {
         if (running) {
             onePlayer.move();
             checkApple();
-            checkCollisions();
+            if(State == STATE.GAME)
+                checkCollisions();
         }
         repaint();
 
