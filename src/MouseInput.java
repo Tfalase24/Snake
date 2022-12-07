@@ -27,7 +27,6 @@ public class MouseInput extends Component implements MouseListener {
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
-                    System.out.println("The current state is: " + GamePanel.State);
                     GamePanel.State = GamePanel.STATE.GAMEOVER;
                 }
             }
@@ -51,9 +50,19 @@ public class MouseInput extends Component implements MouseListener {
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
-                    System.out.println("The restart button has been clicked");
-                    GamePanel.State = GamePanel.STATE.GAME;
-                    GamePanel.timer.restart();
+                    GamePanel.newGame();
+                }
+            }
+        }
+        if(GamePanel.State == GamePanel.STATE.GAMEOVER) {
+            if ((mx >= (GamePanel.SCREEN_WIDTH / 2) - 75) && (mx <= (GamePanel.SCREEN_WIDTH / 2) + 75)) {
+                if (my >= 450 && my <= 526) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                    System.exit(0);
                 }
             }
         }

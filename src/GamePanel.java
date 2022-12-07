@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
 import java.util.Random;
 
 public class GamePanel extends JPanel implements ActionListener {
@@ -23,7 +24,7 @@ public class GamePanel extends JPanel implements ActionListener {
     static char direction = 'R';
     static boolean running = false;
     static Timer timer;
-    Random random;
+    static Random random;
     Graphics graphics;
     GameMenu menu = new GameMenu();
     GameOver gameOver = new GameOver();
@@ -98,7 +99,19 @@ public class GamePanel extends JPanel implements ActionListener {
         timer.start();*/
     }
 
-    public void newApple() {
+    public static void newGame(){
+        State = STATE.GAME;
+        appleEaten = 0;
+        bodyParts = 6;
+        newApple();
+        running = true;
+        Arrays.fill(x, 0);
+        Arrays.fill(y, 0);
+        direction = 'R';
+        timer.start();
+    }
+
+    public static void newApple() {
         appleX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
         appleY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
 
@@ -132,9 +145,6 @@ public class GamePanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (GamePanel.State == STATE.GAME) {
-            if(restart) {
-
-            }
             onePlayer.move();
             checkApple();
             checkCollisions();
