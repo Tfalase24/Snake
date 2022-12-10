@@ -7,16 +7,8 @@ import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.Random;
 
-public class GamePanel extends JPanel implements ActionListener {
+public class GamePanel extends JPanel implements ActionListener, GameFunctionality {
 
-    final static int SCREEN_WIDTH = 600;
-    final static int SCREEN_HEIGHT = 600;
-    final static int UNIT_SIZE = 25;
-    final static int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
-    final int DELAY = 75;
-
-    final static int x[] = new int[GAME_UNITS];
-    final static int y[] = new int[GAME_UNITS];
     static int bodyParts = 6;
     static int appleEaten = 0;
     static int appleX;
@@ -25,11 +17,9 @@ public class GamePanel extends JPanel implements ActionListener {
     static boolean running = false;
     static Timer timer;
     static Random random;
-    Graphics graphics;
     GameMenu menu = new GameMenu();
     GameOver gameOver = new GameOver();
     OnePlayer onePlayer = new OnePlayer();
-    Boolean restart = false;
     public static STATE State = STATE.MENU;
 
     int getBodyParts() {
@@ -79,7 +69,7 @@ public class GamePanel extends JPanel implements ActionListener {
             while(!running) {
                 startGame();
             }
-            onePlayer.OnePlayerMode(graphics);
+            onePlayer.drawMode(graphics);
         } else {
             if(State == STATE.GAMEOVER)
             gameOver.gameOver(graphics);
@@ -95,8 +85,6 @@ public class GamePanel extends JPanel implements ActionListener {
     public void startGame() {
         newApple();
         running = true;
-      /*  timer = new Timer(DELAY, this);
-        timer.start();*/
     }
 
     public static void newGame(){
@@ -145,7 +133,7 @@ public class GamePanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (GamePanel.State == STATE.GAME) {
-            onePlayer.move();
+            onePlayer.gameMove();
             checkApple();
             checkCollisions();
         }
