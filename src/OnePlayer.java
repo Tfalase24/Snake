@@ -1,7 +1,12 @@
 import java.awt.*;
+import java.util.Random;
 
-public class OnePlayer implements GameMode {
+public class OnePlayer extends GameMode {
     GamePanel gamePanel;
+    Random random;
+    int[] x = new int[GamePanel.GAME_UNITS];
+    int[] y = new int[GamePanel.GAME_UNITS];
+
     public void checkCollisions() {
         for (int i = GamePanel.bodyParts; i > 0; i--) {
             if ((GamePanel.x[0] == GamePanel.x[i] && GamePanel.y[0] == GamePanel.y[i])) {
@@ -17,12 +22,10 @@ public class OnePlayer implements GameMode {
         }
     }
 
-    public void checkApple() {
-        if ((GamePanel.x[0] == GamePanel.appleEaten && GamePanel.y[0] == GamePanel.appleY)) {
-            gamePanel.setBodyParts(gamePanel.getBodyParts() + 1);
-           gamePanel.setAppleEaten(gamePanel.getAppleEaten() + 1);
-           gamePanel.newApple();
-        }
+    @Override
+    void newApple() {
+        appleX = random.nextInt((int) (GamePanel.SCREEN_WIDTH / GamePanel.UNIT_SIZE)) * GamePanel.UNIT_SIZE;
+        appleY = random.nextInt((int) (GamePanel.SCREEN_HEIGHT / GamePanel.UNIT_SIZE)) * GamePanel.UNIT_SIZE;
 
     }
 
@@ -33,7 +36,7 @@ public class OnePlayer implements GameMode {
             graphics.drawLine(0, i * GamePanel.UNIT_SIZE, GamePanel.SCREEN_WIDTH, i * GamePanel.UNIT_SIZE);
         }
         graphics.setColor(Color.RED);
-        graphics.fillOval(GamePanel.appleX, GamePanel.appleY, GamePanel.UNIT_SIZE, GamePanel.UNIT_SIZE);
+        graphics.fillOval(appleX, appleY, GamePanel.UNIT_SIZE, GamePanel.UNIT_SIZE);
 
         for (int i = 0; i < GamePanel.bodyParts; i++) {
             if (i == 0) {
@@ -47,13 +50,15 @@ public class OnePlayer implements GameMode {
         graphics.setColor(Color.RED);
         graphics.setFont(new Font("Ink Free", Font.BOLD, 24));
         FontMetrics fontMetrics = graphics.getFontMetrics(graphics.getFont());
-        graphics.drawString(("Score: " + GamePanel.appleEaten), (GamePanel.SCREEN_WIDTH - fontMetrics.stringWidth("Score: " + GamePanel.appleEaten)) / 2, graphics.getFont().getSize());
+        graphics.drawString(("Score: " + appleEaten), (GamePanel.SCREEN_WIDTH - fontMetrics.stringWidth("Score: " + appleEaten)) / 2, graphics.getFont().getSize());
 
     }
 
+
+
     @Override
     public void gameMove() {
-        for (int i = GamePanel.bodyParts; i > 0; i--) {
+        for (int i = bodyParts; i > 0; i--) {
             GamePanel.x[i] = GamePanel.x[i - 1];
             GamePanel.y[i] = GamePanel.y[i - 1];
         }
@@ -70,6 +75,18 @@ public class OnePlayer implements GameMode {
             case 'R':
                 GamePanel. x[0] = GamePanel.x[0] + GamePanel.UNIT_SIZE;
                 break;
+        }
+
+    }
+
+    @Override
+    public void eatApple() {
+        if ((x[0] == appleX && y[0] == appleY)) {
+            System.out.println(appleX);
+            System.out.println(appleY);
+            bodyParts++;
+            appleEaten++;
+            // newApple();
         }
 
     }

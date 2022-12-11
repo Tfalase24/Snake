@@ -134,7 +134,7 @@ public class GamePanel extends JPanel implements ActionListener, GameFunctionali
     public void actionPerformed(ActionEvent e) {
         if (GamePanel.State == STATE.GAME) {
             onePlayer.gameMove();
-            checkApple();
+            onePlayer.eatApple();
             checkCollisions();
         }
         repaint();
