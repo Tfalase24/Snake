@@ -22,23 +22,6 @@ public class GamePanel extends JPanel implements ActionListener, GameFunctionali
     OnePlayer onePlayer = new OnePlayer();
     public static STATE State = STATE.MENU;
 
-    int getBodyParts() {
-        return bodyParts;
-    }
-
-    public void setBodyParts(int bodyParts) {
-        this.bodyParts = bodyParts;
-    }
-
-    public int getAppleEaten() {
-        return appleEaten;
-    }
-
-    public void setAppleEaten(int appleEaten) {
-        this.appleEaten = appleEaten;
-    }
-
-
     public enum STATE{
         MENU,
         GAME,
@@ -124,7 +107,7 @@ public class GamePanel extends JPanel implements ActionListener, GameFunctionali
         if (GamePanel.State == STATE.GAME) {
             onePlayer.gameMove();
             onePlayer.eatApple();
-            checkCollisions();
+            onePlayer.checkCollisions();
         }
         repaint();
     }

@@ -67,6 +67,20 @@ public class OnePlayer extends GameMode {
     }
 
     @Override
+    void checkCollisions() {
+        for (int i = bodyParts; i > 0; i--) {
+            if ((GamePanel.x[0] == GamePanel.x[i] && GamePanel.y[0] == GamePanel.y[i])) {
+                GamePanel.State = GamePanel.STATE.GAMEOVER;
+                GamePanel.timer.stop();
+            }
+        }
+        if (GamePanel.x[0] < 0 || GamePanel.x[0] > GameFunctionality.SCREEN_WIDTH || GamePanel.y[0] < 0 || GamePanel.y[0] > GameFunctionality.SCREEN_HEIGHT) {
+            GamePanel.State = GamePanel.STATE.GAMEOVER;
+            GamePanel.timer.stop();
+        }
+    }
+
+    @Override
     void newGame() {
         GamePanel.State = GamePanel.STATE.GAME;
         appleEaten = 0;

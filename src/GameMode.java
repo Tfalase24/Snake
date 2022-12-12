@@ -14,5 +14,7 @@ public abstract class GameMode {
 
     abstract void eatApple();
 
+    abstract void checkCollisions();
+
     abstract void newGame();
 }
