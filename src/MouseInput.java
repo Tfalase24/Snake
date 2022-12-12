@@ -7,64 +7,61 @@ public class MouseInput extends Component implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         int mx = e.getX();
         int my = e.getY();
+        
+        switch (GamePanel.State){
+            case MENU:
+                if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
+                    if (my >= 150 && my <= 250) {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                        GamePanel.State = GamePanel.STATE.GAME;
+                    }
+                }
+                if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
+                    if (my >= 300 && my <= 400) {
 
-        if(GamePanel.State == GamePanel.STATE.MENU){
-            if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
-                if (my >= 150 && my <= 250) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                        GamePanel.State = GamePanel.STATE.GAMEOVER;
                     }
-                    GamePanel.State = GamePanel.STATE.GAME;
                 }
-            }
-            if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
-                if (my >= 300 && my <= 400) {
-
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
+                if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
+                    if (my >= 450 && my <= 550) {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                        System.exit(0);
                     }
-                    GamePanel.State = GamePanel.STATE.GAMEOVER;
                 }
-            }
-            if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
-                if (my >= 450 && my <= 550) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
+            case GAMEOVER:
+                if((mx >= (GamePanel.SCREEN_WIDTH / 2) - 75) && (mx <= (GamePanel.SCREEN_WIDTH / 2) + 75)) {
+                    if (my >= 350 && my <= 426) {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                        GameMode.newGame();
                     }
-                    System.exit(0);
                 }
-            }
-        }
-
-        if(GamePanel.State == GamePanel.STATE.GAMEOVER){
-            if((mx >= (GamePanel.SCREEN_WIDTH / 2) - 75) && (mx <= (GamePanel.SCREEN_WIDTH / 2) + 75)) {
-                if (my >= 350 && my <= 426) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
+                if ((mx >= (GamePanel.SCREEN_WIDTH / 2) - 75) && (mx <= (GamePanel.SCREEN_WIDTH / 2) + 75)) {
+                    if (my >= 450 && my <= 526) {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                        System.exit(0);
                     }
-                    GameMode.newGame();
                 }
-            }
-        }
-        if(GamePanel.State == GamePanel.STATE.GAMEOVER) {
-            if ((mx >= (GamePanel.SCREEN_WIDTH / 2) - 75) && (mx <= (GamePanel.SCREEN_WIDTH / 2) + 75)) {
-                if (my >= 450 && my <= 526) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
-                    }
-                    System.exit(0);
-                }
-            }
         }
 
     }
