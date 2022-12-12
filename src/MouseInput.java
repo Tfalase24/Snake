@@ -7,14 +7,12 @@ public class MouseInput extends Component implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         int mx = e.getX();
         int my = e.getY();
-        
-        OnePlayer onePlayer = null;
 
         if(GamePanel.State == GamePanel.STATE.MENU){
             if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
                 if (my >= 150 && my <= 250) {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
@@ -25,7 +23,7 @@ public class MouseInput extends Component implements MouseListener {
                 if (my >= 300 && my <= 400) {
 
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
@@ -35,7 +33,7 @@ public class MouseInput extends Component implements MouseListener {
             if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {
                 if (my >= 450 && my <= 550) {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
@@ -48,7 +46,7 @@ public class MouseInput extends Component implements MouseListener {
             if((mx >= (GamePanel.SCREEN_WIDTH / 2) - 75) && (mx <= (GamePanel.SCREEN_WIDTH / 2) + 75)) {
                 if (my >= 350 && my <= 426) {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
@@ -60,7 +58,7 @@ public class MouseInput extends Component implements MouseListener {
             if ((mx >= (GamePanel.SCREEN_WIDTH / 2) - 75) && (mx <= (GamePanel.SCREEN_WIDTH / 2) + 75)) {
                 if (my >= 450 && my <= 526) {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }

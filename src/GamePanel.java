@@ -55,7 +55,7 @@ public class GamePanel extends JPanel implements ActionListener, GameFunctionali
             if(State == STATE.GAMEOVER)
             gameOver.gameOver(graphics);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
