@@ -7,6 +7,8 @@ public class MouseInput extends Component implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         int mx = e.getX();
         int my = e.getY();
+        
+        OnePlayer onePlayer = null;
 
         if(GamePanel.State == GamePanel.STATE.MENU){
             if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {

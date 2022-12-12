@@ -89,8 +89,8 @@ public class GamePanel extends JPanel implements ActionListener, GameFunctionali
 
     public static void newGame(){
         State = STATE.GAME;
-        appleEaten = 0;
-        bodyParts = 6;
+        OnePlayer.appleEaten = 0;
+        OnePlayer.bodyParts = 6;
         newApple();
         running = true;
         Arrays.fill(x, 0);
@@ -110,25 +110,14 @@ public class GamePanel extends JPanel implements ActionListener, GameFunctionali
         for (int i = bodyParts; i > 0; i--) {
             if ((x[0] == x[i] && y[0] == y[i])) {
                 State = STATE.GAMEOVER;
+                timer.stop();
             }
         }
         if (x[0] < 0 || x[0] > SCREEN_WIDTH || y[0] < 0 || y[0] > SCREEN_HEIGHT) {
             State = STATE.GAMEOVER;
-        }
-        if (State == STATE.GAMEOVER) {
             timer.stop();
         }
     }
-
-    public void checkApple() {
-        if ((x[0] == appleX && y[0] == appleY)) {
-            bodyParts++;
-            appleEaten++;
-            newApple();
-        }
-
-    }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {

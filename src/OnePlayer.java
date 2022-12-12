@@ -1,33 +1,10 @@
 import java.awt.*;
-import java.util.Random;
+import java.util.Arrays;
 
 public class OnePlayer extends GameMode {
-    GamePanel gamePanel;
-    Random random;
-    int[] x = new int[GamePanel.GAME_UNITS];
-    int[] y = new int[GamePanel.GAME_UNITS];
 
-    public void checkCollisions() {
-        for (int i = GamePanel.bodyParts; i > 0; i--) {
-            if ((GamePanel.x[0] == GamePanel.x[i] && GamePanel.y[0] == GamePanel.y[i])) {
-                GamePanel.State = GamePanel.STATE.GAMEOVER;
-            }
-        }
-
-        if (GamePanel.x[0] < 0 || GamePanel.x[0] > GamePanel.SCREEN_WIDTH || GamePanel.y[0] < 0 || GamePanel.y[0] > GamePanel.SCREEN_HEIGHT) {
-            GamePanel.State = GamePanel.STATE.GAMEOVER;
-        }
-        if (!GamePanel.running) {
-            GamePanel.timer.stop();
-        }
-    }
-
-    @Override
-    void newApple() {
-        appleX = random.nextInt((int) (GamePanel.SCREEN_WIDTH / GamePanel.UNIT_SIZE)) * GamePanel.UNIT_SIZE;
-        appleY = random.nextInt((int) (GamePanel.SCREEN_HEIGHT / GamePanel.UNIT_SIZE)) * GamePanel.UNIT_SIZE;
-
-    }
+    static int bodyParts = 6;
+    static int appleEaten = 0;
 
     @Override
     public void drawMode(Graphics graphics) {
@@ -36,9 +13,9 @@ public class OnePlayer extends GameMode {
             graphics.drawLine(0, i * GamePanel.UNIT_SIZE, GamePanel.SCREEN_WIDTH, i * GamePanel.UNIT_SIZE);
         }
         graphics.setColor(Color.RED);
-        graphics.fillOval(appleX, appleY, GamePanel.UNIT_SIZE, GamePanel.UNIT_SIZE);
+        graphics.fillOval(GamePanel.appleX, GamePanel.appleY, GamePanel.UNIT_SIZE, GamePanel.UNIT_SIZE);
 
-        for (int i = 0; i < GamePanel.bodyParts; i++) {
+        for (int i = 0; i < bodyParts; i++) {
             if (i == 0) {
                 graphics.setColor(Color.GREEN);
                 graphics.fillRect(GamePanel.x[i], GamePanel.y[i], GamePanel.UNIT_SIZE, GamePanel.UNIT_SIZE);
@@ -81,13 +58,24 @@ public class OnePlayer extends GameMode {
 
     @Override
     public void eatApple() {
-        if ((x[0] == appleX && y[0] == appleY)) {
-            System.out.println(appleX);
-            System.out.println(appleY);
+        if ((GamePanel.x[0] == GamePanel.appleX && GamePanel.y[0] == GamePanel.appleY)) {
             bodyParts++;
             appleEaten++;
-            // newApple();
+            GamePanel.newApple();
         }
 
+    }
+
+    @Override
+    void newGame() {
+        GamePanel.State = GamePanel.STATE.GAME;
+        appleEaten = 0;
+        bodyParts = 6;
+        GamePanel.newApple();
+        GamePanel.running = true;
+        Arrays.fill(GamePanel.x, 0);
+        Arrays.fill(GamePanel.y, 0);
+        GamePanel.direction = 'R';
+        GamePanel.timer.start();
     }
 }
