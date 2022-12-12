@@ -52,7 +52,7 @@ public class MouseInput extends Component implements MouseListener {
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
-                    GamePanel.newGame();
+                    GameMode.newGame();
                 }
             }
         }

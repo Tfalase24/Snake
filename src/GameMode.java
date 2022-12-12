@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Arrays;
 import java.util.Random;
 
 public abstract class GameMode {
@@ -16,5 +17,15 @@ public abstract class GameMode {
 
     abstract void checkCollisions();
 
-    abstract void newGame();
+    static void newGame() {
+        GamePanel.State = GamePanel.STATE.GAME;
+        OnePlayer.appleEaten = 0;
+        OnePlayer.bodyParts = 6;
+        GamePanel.newApple();
+        GamePanel.running = true;
+        Arrays.fill(GameFunctionality.x, 0);
+        Arrays.fill(GameFunctionality.y, 0);
+        GamePanel.direction = 'R';
+        GamePanel.timer.start();
+    }
 }

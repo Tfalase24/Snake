@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.Arrays;
 
 public class OnePlayer extends GameMode {
 
@@ -80,16 +79,4 @@ public class OnePlayer extends GameMode {
         }
     }
 
-    @Override
-    void newGame() {
-        GamePanel.State = GamePanel.STATE.GAME;
-        appleEaten = 0;
-        bodyParts = 6;
-        GamePanel.newApple();
-        GamePanel.running = true;
-        Arrays.fill(GamePanel.x, 0);
-        Arrays.fill(GamePanel.y, 0);
-        GamePanel.direction = 'R';
-        GamePanel.timer.start();
-    }
 }

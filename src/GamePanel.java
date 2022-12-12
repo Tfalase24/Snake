@@ -4,13 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Arrays;
 import java.util.Random;
 
 public class GamePanel extends JPanel implements ActionListener, GameFunctionality {
 
-    static int bodyParts = 6;
-    static int appleEaten = 0;
+
     static int appleX;
     static int appleY;
     static char direction = 'R';
@@ -70,36 +68,10 @@ public class GamePanel extends JPanel implements ActionListener, GameFunctionali
         running = true;
     }
 
-    public static void newGame(){
-        State = STATE.GAME;
-        OnePlayer.appleEaten = 0;
-        OnePlayer.bodyParts = 6;
-        newApple();
-        running = true;
-        Arrays.fill(x, 0);
-        Arrays.fill(y, 0);
-        direction = 'R';
-        timer.start();
-    }
-
     public static void newApple() {
         appleX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
         appleY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
 
-    }
-
-    public void checkCollisions() {
-
-        for (int i = bodyParts; i > 0; i--) {
-            if ((x[0] == x[i] && y[0] == y[i])) {
-                State = STATE.GAMEOVER;
-                timer.stop();
-            }
-        }
-        if (x[0] < 0 || x[0] > SCREEN_WIDTH || y[0] < 0 || y[0] > SCREEN_HEIGHT) {
-            State = STATE.GAMEOVER;
-            timer.stop();
-        }
     }
 
     @Override
