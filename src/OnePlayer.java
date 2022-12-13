@@ -73,10 +73,17 @@ public class OnePlayer extends GameMode {
                 GamePanel.timer.stop();
             }
         }
-        if (GameFunctionality.x[0] < 0 || GameFunctionality.x[0] == GameFunctionality.SCREEN_WIDTH || GameFunctionality.y[0] < 0 || GameFunctionality.y[0] == GameFunctionality.SCREEN_HEIGHT) {
-            GamePanel.State = GamePanel.STATE.GAMEOVER;
-            GamePanel.timer.stop();
+        if(GameFunctionality.x[0] < 0){
+            GameFunctionality.x[0] = GameFunctionality.SCREEN_WIDTH - GameFunctionality.UNIT_SIZE;
+        }
+        if(GameFunctionality.x[0] == GameFunctionality.SCREEN_WIDTH){
+            GameFunctionality.x[0] = 0;
+        }
+        if(GameFunctionality.y[0] < 0){
+            GameFunctionality.y[0] = GameFunctionality.SCREEN_HEIGHT - GameFunctionality.UNIT_SIZE;
+        }
+        if(GameFunctionality.y[0] == GameFunctionality.SCREEN_HEIGHT){
+            GameFunctionality.y[0] = 0;
         }
     }
-
 }
