@@ -17,6 +17,8 @@ public abstract class GameMode {
 
     abstract void checkCollisions();
 
+    abstract void throughWalls();
+
     static void newGame() {
         GamePanel.State = GamePanel.STATE.GAME;
         OnePlayer.appleEaten = 0;

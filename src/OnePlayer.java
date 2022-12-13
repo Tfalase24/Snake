@@ -73,6 +73,20 @@ public class OnePlayer extends GameMode {
                 GamePanel.timer.stop();
             }
         }
+        if (GameFunctionality.x[0] < 0 || GameFunctionality.x[0] == GameFunctionality.SCREEN_WIDTH || GameFunctionality.y[0] < 0 || GameFunctionality.y[0] == GameFunctionality.SCREEN_HEIGHT) {
+            GamePanel.State = GamePanel.STATE.GAMEOVER;
+            GamePanel.timer.stop();
+        }
+    }
+
+    @Override
+    void throughWalls() {
+        for (int i = bodyParts; i > 0; i--) {
+            if ((GamePanel.x[0] == GamePanel.x[i] && GamePanel.y[0] == GamePanel.y[i])) {
+                GamePanel.State = GamePanel.STATE.GAMEOVER;
+                GamePanel.timer.stop();
+            }
+        }
         if(GameFunctionality.x[0] < 0){
             GameFunctionality.x[0] = GameFunctionality.SCREEN_WIDTH - GameFunctionality.UNIT_SIZE;
         }
@@ -86,4 +100,5 @@ public class OnePlayer extends GameMode {
             GameFunctionality.y[0] = 0;
         }
     }
+
 }
