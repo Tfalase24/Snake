@@ -9,4 +9,7 @@ public interface GameFunctionality {
     int[] x = new int[GAME_UNITS];
     int[] y = new int[GAME_UNITS];
 
+    int[] x2 = new int[GAME_UNITS];
+    int[] y2 = new int[GAME_UNITS];
+
 }

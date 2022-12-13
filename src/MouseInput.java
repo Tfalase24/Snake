@@ -7,7 +7,7 @@ public class MouseInput extends Component implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         int mx = e.getX();
         int my = e.getY();
-        
+
         switch (GamePanel.State){
             case MENU:
                 if (mx >= ((GamePanel.SCREEN_WIDTH / 2) - 100) && mx <= ((GamePanel.SCREEN_WIDTH / 2) + 100)) {

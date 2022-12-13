@@ -19,7 +19,7 @@ public class OnePlayer extends GameMode {
                 graphics.setColor(Color.GREEN);
                 graphics.fillRect(GamePanel.x[i], GamePanel.y[i], GamePanel.UNIT_SIZE, GamePanel.UNIT_SIZE);
             } else {
-                graphics.setColor(new Color(45, 180, 0));
+                graphics.setColor(new Color(45, 0, 180));
                 graphics.fillRect(GamePanel.x[i], GamePanel.y[i], GamePanel.UNIT_SIZE, GamePanel.UNIT_SIZE);
             }
         }
@@ -73,7 +73,7 @@ public class OnePlayer extends GameMode {
                 GamePanel.timer.stop();
             }
         }
-        if (GamePanel.x[0] < 0 || GamePanel.x[0] > GameFunctionality.SCREEN_WIDTH || GamePanel.y[0] < 0 || GamePanel.y[0] > GameFunctionality.SCREEN_HEIGHT) {
+        if (GameFunctionality.x[0] < 0 || GameFunctionality.x[0] == GameFunctionality.SCREEN_WIDTH || GameFunctionality.y[0] < 0 || GameFunctionality.y[0] == GameFunctionality.SCREEN_HEIGHT) {
             GamePanel.State = GamePanel.STATE.GAMEOVER;
             GamePanel.timer.stop();
         }
