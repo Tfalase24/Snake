@@ -71,9 +71,6 @@ public class GamePanel extends JPanel implements ActionListener, GameFunctionali
     public static void newApple() {
         appleX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
         appleY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
-        if(OnePlayer.appleEaten % 6 == 0 && OnePlayer.appleEaten != 0){
-
-        }
 
     }
 

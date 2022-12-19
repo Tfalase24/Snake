@@ -1,12 +1,13 @@
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Random;
 
 public abstract class GameMode {
 
 
 
-    public static int appleEaten = 0;
-    public static int bodyParts = 6;
+    public static int appleEaten;
+    public static int bodyParts;
 
     abstract void drawMode(Graphics graphics);
 
@@ -18,14 +19,10 @@ public abstract class GameMode {
 
     abstract void throughWalls();
 
-    abstract void eatApplePoison();
-
-    abstract void eatGoldenApple() throws InterruptedException;
-
     static void newGame() {
         GamePanel.State = GamePanel.STATE.GAME;
-        appleEaten = 0;
-        bodyParts = 6;
+        OnePlayer.appleEaten = 0;
+        OnePlayer.bodyParts = 6;
         GamePanel.newApple();
         GamePanel.running = true;
         Arrays.fill(GameFunctionality.x, 0);

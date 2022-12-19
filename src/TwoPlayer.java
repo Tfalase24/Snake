@@ -16,7 +16,6 @@ public class TwoPlayer extends GameMode{
     @Override
     void gameMove() {
 
-
     }
 
     @Override
@@ -26,21 +25,6 @@ public class TwoPlayer extends GameMode{
 
     @Override
     void checkCollisions() {
-
-    }
-
-    @Override
-    void throughWalls() {
-
-    }
-
-    @Override
-    void eatApplePoison() {
-
-    }
-
-    @Override
-    void eatGoldenApple() {
 
     }
 }

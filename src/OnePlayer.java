@@ -11,14 +11,10 @@ public class OnePlayer extends GameMode {
             graphics.drawLine(i * GamePanel.UNIT_SIZE, 0, i * GamePanel.UNIT_SIZE, GamePanel.SCREEN_HEIGHT);
             graphics.drawLine(0, i * GamePanel.UNIT_SIZE, GamePanel.SCREEN_WIDTH, i * GamePanel.UNIT_SIZE);
         }
-        if (GameMode.appleEaten % 6 == 0 && GameMode.appleEaten != 0) {
-            graphics.setColor(Color.YELLOW);
-        } else {
-            graphics.setColor(Color.RED);
-        }
+        graphics.setColor(Color.RED);
         graphics.fillOval(GamePanel.appleX, GamePanel.appleY, GamePanel.UNIT_SIZE, GamePanel.UNIT_SIZE);
 
-        for (int i = 0; i < GameMode.bodyParts; i++) {
+        for (int i = 0; i < bodyParts; i++) {
             if (i == 0) {
                 graphics.setColor(Color.GREEN);
                 graphics.fillRect(GamePanel.x[i], GamePanel.y[i], GamePanel.UNIT_SIZE, GamePanel.UNIT_SIZE);
@@ -30,7 +26,7 @@ public class OnePlayer extends GameMode {
         graphics.setColor(Color.RED);
         graphics.setFont(new Font("Ink Free", Font.BOLD, 24));
         FontMetrics fontMetrics = graphics.getFontMetrics(graphics.getFont());
-        graphics.drawString(("Score: " + GameMode.appleEaten), (GamePanel.SCREEN_WIDTH - fontMetrics.stringWidth("Score: " + GameMode.appleEaten)) / 2, graphics.getFont().getSize());
+        graphics.drawString(("Score: " + appleEaten), (GamePanel.SCREEN_WIDTH - fontMetrics.stringWidth("Score: " + appleEaten)) / 2, graphics.getFont().getSize());
 
     }
 
@@ -38,22 +34,22 @@ public class OnePlayer extends GameMode {
 
     @Override
     public void gameMove() {
-        for (int i = GameMode.bodyParts; i > 0; i--) {
-            GameFunctionality.x[i] = GameFunctionality.x[i - 1];
-            GameFunctionality.y[i] = GameFunctionality.y[i - 1];
+        for (int i = bodyParts; i > 0; i--) {
+            GamePanel.x[i] = GamePanel.x[i - 1];
+            GamePanel.y[i] = GamePanel.y[i - 1];
         }
         switch (GamePanel.direction) {
             case 'U':
-                GameFunctionality.y[0] = GameFunctionality.y[0] - GameFunctionality.UNIT_SIZE;
+                GamePanel.y[0] = GamePanel.y[0] - GamePanel.UNIT_SIZE;
                 break;
             case 'D':
-                GameFunctionality. y[0] = GameFunctionality.y[0] + GameFunctionality.UNIT_SIZE;
+                GamePanel. y[0] = GamePanel.y[0] + GamePanel.UNIT_SIZE;
                 break;
             case 'L':
-                GameFunctionality.x[0] = GameFunctionality.x[0] - GameFunctionality.UNIT_SIZE;
+                GamePanel.x[0] = GamePanel.x[0] - GamePanel.UNIT_SIZE;
                 break;
             case 'R':
-                GameFunctionality.x[0] = GameFunctionality.x[0] + GameFunctionality.UNIT_SIZE;
+                GamePanel. x[0] = GamePanel.x[0] + GamePanel.UNIT_SIZE;
                 break;
         }
 
@@ -61,9 +57,9 @@ public class OnePlayer extends GameMode {
 
     @Override
     public void eatApple() {
-        if ((GameFunctionality.x[0] == GamePanel.appleX && GameFunctionality.y[0] == GamePanel.appleY)) {
-            GameMode.bodyParts++;
-            GameMode.appleEaten++;
+        if ((GamePanel.x[0] == GamePanel.appleX && GamePanel.y[0] == GamePanel.appleY)) {
+            bodyParts++;
+            appleEaten++;
             GamePanel.newApple();
         }
 
@@ -71,8 +67,8 @@ public class OnePlayer extends GameMode {
 
     @Override
     void checkCollisions() {
-        for (int i = GameMode.bodyParts; i > 0; i--) {
-            if ((GameFunctionality.x[0] == GameFunctionality.x[i] && GameFunctionality.y[0] == GameFunctionality.y[i])) {
+        for (int i = bodyParts; i > 0; i--) {
+            if ((GamePanel.x[0] == GamePanel.x[i] && GamePanel.y[0] == GamePanel.y[i])) {
                 GamePanel.State = GamePanel.STATE.GAMEOVER;
                 GamePanel.timer.stop();
             }
@@ -85,8 +81,8 @@ public class OnePlayer extends GameMode {
 
     @Override
     void throughWalls() {
-        for (int i = GameMode.bodyParts; i > 0; i--) {
-            if ((GameFunctionality.x[0] == GameFunctionality.x[i] && GameFunctionality.y[0] == GameFunctionality.y[i])) {
+        for (int i = bodyParts; i > 0; i--) {
+            if ((GamePanel.x[0] == GamePanel.x[i] && GamePanel.y[0] == GamePanel.y[i])) {
                 GamePanel.State = GamePanel.STATE.GAMEOVER;
                 GamePanel.timer.stop();
             }
@@ -103,22 +99,6 @@ public class OnePlayer extends GameMode {
         if(GameFunctionality.y[0] == GameFunctionality.SCREEN_HEIGHT){
             GameFunctionality.y[0] = 0;
         }
-    }
-
-    @Override
-    void eatApplePoison() {
-
-    }
-
-    @Override
-    void eatGoldenApple() throws InterruptedException {
-        if ((GameFunctionality.x[0] == GamePanel.appleX && GameFunctionality.y[0] == GamePanel.appleY && appleEaten % 6 == 0 && appleEaten != 0)){
-           GameMode.bodyParts++;
-           GameMode.appleEaten = GameMode.appleEaten + 3;
-           Thread.sleep(5000);
-           GamePanel.newApple();
-        }
-
     }
 
 }
