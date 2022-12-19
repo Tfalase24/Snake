@@ -27,4 +27,9 @@ public class TwoPlayer extends GameMode{
     void checkCollisions() {
 
     }
+
+    @Override
+    void throughWalls() {
+
+    }
 }

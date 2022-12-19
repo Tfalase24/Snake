@@ -12,7 +12,7 @@ public class GameOver {
         graphics.setColor(Color.RED);
         graphics.setFont(new Font("Ink Free", Font.BOLD, 24));
         FontMetrics fontMetrics = graphics.getFontMetrics(graphics.getFont());
-        graphics.drawString(("Score: " + OnePlayer.appleEaten), (GamePanel.SCREEN_WIDTH - fontMetrics.stringWidth("Score: " + OnePlayer.appleEaten)) / 2, graphics.getFont().getSize());
+        graphics.drawString(("Score: " + GameMode.appleEaten), (GamePanel.SCREEN_WIDTH - fontMetrics.stringWidth("Score: " + GameMode.appleEaten)) / 2, graphics.getFont().getSize());
 
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("Ink Free", Font.BOLD, 24));

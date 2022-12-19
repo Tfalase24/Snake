@@ -2,9 +2,6 @@ import java.awt.*;
 
 public class OnePlayer extends GameMode {
 
-    static int bodyParts = 6;
-    static int appleEaten = 0;
-
     @Override
     public void drawMode(Graphics graphics) {
         for (int i = 0; i < GamePanel.SCREEN_HEIGHT / GamePanel.UNIT_SIZE; i++) {
@@ -14,7 +11,7 @@ public class OnePlayer extends GameMode {
         graphics.setColor(Color.RED);
         graphics.fillOval(GamePanel.appleX, GamePanel.appleY, GamePanel.UNIT_SIZE, GamePanel.UNIT_SIZE);
 
-        for (int i = 0; i < bodyParts; i++) {
+        for (int i = 0; i < GameMode.bodyParts; i++) {
             if (i == 0) {
                 graphics.setColor(Color.GREEN);
                 graphics.fillRect(GamePanel.x[i], GamePanel.y[i], GamePanel.UNIT_SIZE, GamePanel.UNIT_SIZE);
@@ -26,7 +23,7 @@ public class OnePlayer extends GameMode {
         graphics.setColor(Color.RED);
         graphics.setFont(new Font("Ink Free", Font.BOLD, 24));
         FontMetrics fontMetrics = graphics.getFontMetrics(graphics.getFont());
-        graphics.drawString(("Score: " + appleEaten), (GamePanel.SCREEN_WIDTH - fontMetrics.stringWidth("Score: " + appleEaten)) / 2, graphics.getFont().getSize());
+        graphics.drawString(("Score: " + GameMode.appleEaten), (GamePanel.SCREEN_WIDTH - fontMetrics.stringWidth("Score: " + GameMode.appleEaten)) / 2, graphics.getFont().getSize());
 
     }
 
@@ -34,7 +31,7 @@ public class OnePlayer extends GameMode {
 
     @Override
     public void gameMove() {
-        for (int i = bodyParts; i > 0; i--) {
+        for (int i = GameMode.bodyParts; i > 0; i--) {
             GamePanel.x[i] = GamePanel.x[i - 1];
             GamePanel.y[i] = GamePanel.y[i - 1];
         }
@@ -58,8 +55,8 @@ public class OnePlayer extends GameMode {
     @Override
     public void eatApple() {
         if ((GamePanel.x[0] == GamePanel.appleX && GamePanel.y[0] == GamePanel.appleY)) {
-            bodyParts++;
-            appleEaten++;
+            GameMode.bodyParts++;
+            GameMode.appleEaten++;
             GamePanel.newApple();
         }
 
@@ -67,7 +64,7 @@ public class OnePlayer extends GameMode {
 
     @Override
     void checkCollisions() {
-        for (int i = bodyParts; i > 0; i--) {
+        for (int i = GameMode.bodyParts; i > 0; i--) {
             if ((GamePanel.x[0] == GamePanel.x[i] && GamePanel.y[0] == GamePanel.y[i])) {
                 GamePanel.State = GamePanel.STATE.GAMEOVER;
                 GamePanel.timer.stop();
@@ -81,7 +78,7 @@ public class OnePlayer extends GameMode {
 
     @Override
     void throughWalls() {
-        for (int i = bodyParts; i > 0; i--) {
+        for (int i = GameMode.bodyParts; i > 0; i--) {
             if ((GamePanel.x[0] == GamePanel.x[i] && GamePanel.y[0] == GamePanel.y[i])) {
                 GamePanel.State = GamePanel.STATE.GAMEOVER;
                 GamePanel.timer.stop();
